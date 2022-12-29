@@ -1,4 +1,4 @@
-package com.practice.colorgradient.ui.elements
+package com.practice.colorgradient.ui.home
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.padding

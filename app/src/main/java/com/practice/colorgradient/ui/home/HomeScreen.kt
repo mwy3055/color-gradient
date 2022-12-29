@@ -1,4 +1,4 @@
-package com.practice.colorgradient.ui.screen
+package com.practice.colorgradient.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
