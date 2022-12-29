@@ -3,6 +3,11 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+tasks.withType<Test> {
+    // solves 'no tests found' error
+    useJUnitPlatform()
+}
+
 android {
     namespace = "com.practice.colorgradient"
     compileSdk = 33
@@ -20,6 +25,9 @@ android {
         }
     }
 
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -57,6 +65,9 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
     androidTestImplementation(libs.bundles.compose.ui.test)
+
+    // Accompanist
+    implementation(libs.bundles.accompanist)
 
     // Unit Test
     testImplementation(libs.junit.jupiter)
