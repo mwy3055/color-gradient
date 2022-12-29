@@ -2,16 +2,21 @@ package com.practice.colorgradient.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.SaveAlt
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,9 +33,22 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         systemUiController.setSystemBarsColor(systemBarColor)
     }
 
+    // TODO: move data to ViewModel or any state holder
     val colors = listOf(
         Color(0xFFC5F8AD),
         Color(0xFF3ADCFF),
+    )
+    val buttons = listOf(
+        ButtonState(
+            icon = Icons.Default.Share,
+            text = "Share",
+            onClick = {},
+        ),
+        ButtonState(
+            icon = Icons.Default.SaveAlt,
+            text = "Save",
+            onClick = {},
+        ),
     )
 
     Scaffold(
@@ -60,12 +78,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     .weight(1f),
                 itemSpacing = 40.dp,
             )
-            Spacer(
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
-                    .background(MaterialTheme.colorScheme.secondaryContainer),
-            )
+                    .weight(1f),
+            ) {
+                ButtonItems(
+                    buttons = buttons,
+                    modifier = Modifier.align(Alignment.Center),
+                    arrangement = Arrangement.Center,
+                    spacing = 20.dp,
+                )
+            }
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
