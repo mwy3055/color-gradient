@@ -64,7 +64,6 @@ dependencies {
     // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
-    androidTestImplementation(libs.bundles.compose.ui.test)
 
     // Accompanist
     implementation(libs.bundles.accompanist)
