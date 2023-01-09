@@ -2,9 +2,9 @@ package com.practice.colorgradient
 
 import androidx.compose.ui.geometry.Offset
 import com.practice.colorgradient.util.rotate
+import com.practice.colorgradient.util.similar
 import org.junit.jupiter.api.Test
 import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.sin
 
 class OffsetTest {
@@ -25,6 +25,4 @@ class OffsetTest {
             "Expected: $expected\n  Actual: $actual"
         }
     }
-
-    private fun Float.similar(other: Float) = abs(this - other) <= 1e9
 }
