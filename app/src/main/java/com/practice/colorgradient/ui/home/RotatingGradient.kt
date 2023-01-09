@@ -4,8 +4,12 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ChevronRight
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -22,7 +26,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
@@ -34,11 +37,11 @@ import kotlin.math.atan
 import kotlin.system.exitProcess
 
 @Composable
-fun RotatorWithContent(
+fun RotatingGradient(
     colors: List<Color>,
     modifier: Modifier = Modifier,
     shape: Shape = MaterialTheme.shapes.extraLarge,
-    content: @Composable BoxScope.() -> Unit = {},
+    content: @Composable BoxScope.(Float) -> Unit = {},
 ) {
     // 별도의 언급이 없는 좌표는 Composable의 가운데를 기준으로 한다.
     // 회전할 각도
@@ -100,30 +103,33 @@ fun RotatorWithContent(
         brush = brush,
         shape = shape,
     ) {
-        val isPreview = LocalInspectionMode.current
-        if (isPreview) {
-            Column {
-                Text(text = "Angle = ${angle.toFloat()}")
-                Text(text = "Start: $startOffset\nend: $endOffset")
-            }
-            Text(
-                text = "test", modifier = Modifier
-                    .align(Alignment.Center)
-                    .rotate(-angle.toFloat())
-            )
-        } else {
-            content()
-        }
+        content(angle.toFloat())
     }
 }
 
 @Preview
 @Composable
-private fun RotatorWithContentPreview() {
+private fun RotatingGradientPreview() {
     ColorGradientTheme(dynamicColor = false) {
-        RotatorWithContent(
+        RotatingGradient(
             colors = gradientSampleColor,
             modifier = Modifier.size(width = 300.dp, height = 200.dp),
-        )
+        ) { angle ->
+            Column(
+                modifier = Modifier.align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.ChevronRight,
+                    contentDescription = null,
+                    modifier = Modifier.rotate(-angle),
+                    tint = contentColorFor(gradientSampleColor[0]),
+                )
+                Text(
+                    text = "${angle.toInt()}",
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
+        }
     }
 }
