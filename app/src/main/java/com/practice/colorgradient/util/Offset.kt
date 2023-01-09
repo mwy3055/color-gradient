@@ -14,3 +14,5 @@ fun Offset.rotate(degree: Double): Offset {
     val newY = x * sin(theta) + y * cos(theta)
     return Offset(newX.toFloat(), newY.toFloat())
 }
+
+fun Offset.rotate(degree: Float): Offset = rotate(degree.toDouble())
