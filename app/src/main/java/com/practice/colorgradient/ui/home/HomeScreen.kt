@@ -28,9 +28,9 @@ import com.practice.colorgradient.ui.theme.ColorGradientTheme
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     val systemUiController = rememberSystemUiController()
-    val systemBarColor = MaterialTheme.colorScheme.primaryContainer
+    val statusBarColor = MaterialTheme.colorScheme.primaryContainer
     LaunchedEffect(key1 = true) {
-        systemUiController.setSystemBarsColor(systemBarColor)
+        systemUiController.setNavigationBarColor(statusBarColor)
     }
 
     // TODO: move data to ViewModel or any state holder
