@@ -18,7 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.LinearGradientShader
+import androidx.compose.ui.graphics.Shader
+import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -52,18 +57,31 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     )
 
     val rotatingState = rememberRotatingState()
-
+    val backgroundBrush = object : ShaderBrush() {
+        override fun createShader(size: Size): Shader {
+            return LinearGradientShader(
+                from = Offset(x = size.width / 2, y = 0f),
+                to = Offset(x = size.width / 2, y = size.height),
+                colors = listOf(Color.White, statusBarColor),
+                colorStops = listOf(0.7f, 1f),
+            )
+        }
+    }
     Scaffold(
         modifier = modifier,
         topBar = {
-            HomeScreenTopAppBar()
+            HomeScreenTopAppBar(
+                modifier = Modifier.fillMaxWidth(),
+                textColor = Color.Transparent,
+            )
         },
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(16.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(brush = backgroundBrush)
+                .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(30.dp),
         ) {
             RotatingIndicatorGradient(
