@@ -51,6 +51,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         ),
     )
 
+    val rotatingState = rememberRotatingState()
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -64,12 +66,13 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(30.dp),
         ) {
-            Gradient(
+            RotatingIndicatorGradient(
                 colors = colors,
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .fillMaxWidth()
                     .weight(3f),
+                rotatingState = rotatingState,
             )
             ColorItems(
                 colors = colors,
